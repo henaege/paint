@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
+        <style type="text/css" media="screen">
+            canvas {
+                border: 5px solid black;
+                background-color: white;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                cursor: url(./marker.cur), default;
+            }
+            #main-image {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            body {
+                /*background-color: #505050;*/
+                /*background-image: url('background2.jpg');*/
+                
+            }
+             .navbar {
+                 /*background-color: #949EA7;*/
+                 border-radius: 0;
+                 padding: 10px;
+                 border-color: black;
+             }
+
+            #thickness {
+                width: 100px;
+                background-color: #666666;
+                color:white;
+            }
+
+            #controls {
+                /*background-color: #949EA7;*/
+                 border-radius: 0;
+                 padding: 10px;
+                 
+                 margin-top: 30px;
+                 
+            }
+            #color-picker {
+                width: 100px;
+                height: 50px;
+            }
+            #label1 {
+                /*border-top: .5px solid black;
+                border-right: .5px solid black;
+                border-bottom: .5px solid black;*/
+                line-height: 30px;
+                vertical-align: middle;
+                font-size: 2em;
+                text-shadow: 2px 1px black;
+                color: yellow;
+            }
+            #label3 {
+                /*border-top: .5px solid black;
+                border-right: .5px solid black;
+                border-bottom: .5px solid black;*/
+                line-height: 30px;
+                vertical-align: middle;
+                font-size: 2em;
+                text-shadow: 2px 1px black;
+                color: yellow;
+            }
+            #color-container {
+                /*border-top: .5px solid black;
+                border-bottom: .5px solid black;*/
+                line-height: 30px;
+                padding: 5.5px;
+                vertical-align: middle;
+            }
+            #background-color-picker {
+                line-height: 30px;
+                padding: 5.5px;
+                vertical-align: middle;
+            }
+
+            #color-picker-background {
+                width: 100px;
+                height: 50px;
+            }
+
+            #label2 {
+                line-height: 30px;
+                vertical-align: middle;
+                /*border-right: .5px solid black;
+                border-bottom: .5px solid black;*/
+                font-size: 2em;
+                color: yellow;
+                text-shadow: 2px 1px black;
+            }
+            #thickness-container {
+                /*border-bottom: .5px solid black;*/
+                line-height: 30px;
+                padding: 14.5px;
+            }
+            #button-container {
+                padding: 12px;
+            }
+            
+            #header-text {
+                /*background-color: #E2E7EA;*/
+                padding: 20px;
+                font-size: 4em; 
+                font-weight: 900;
+                background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+                background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+                color:transparent;
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+            
+            /*#image {
+                position: absolute;
+                left: 80px;
+                top: 380px;
+            }*/
+            #clear {
+                margin-top: 20px;
+                outline: none;
+            }
+            #timer {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-radius: 0px;
+                background: #00816a;
+                display: inline-block;
+                font-size: 24px;
+                color:aqua;
+                border: 2px solid purple;
+            }
+            .btn {
+                border-radius: 0px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <img id='main-image' src='./background2.jpg'>
+        <div class="row">
+            <div id="header" class="container-fluid">
+                <div id="header-text" class="col-md-12 text-center">
+                    Drew's Picture Draw Deluxe Super Turbo
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="controls" class="col-md-5 col-sm-5">
+                <div id="label1"class="col-md-6 col-sm-6 text-center">
+                    <label>Choose your marker color</label>
+                </div>
+                <div id="color-container" class="col-md-6 col-sm-6 text-center">
+                    <input type="color" id="color-picker"/>
+                </div>
+        
+                <div id="label2"class="col-md-6 col-sm-6 text-center">
+                    <label>Choose your marker size</label>
+                </div>
+                <div id="thickness-container" class="col-md-6 col-sm-6 text-center">
+                    <input type="number" id="thickness" class="text-center" value="6"/>
+                </div>
+
+                <!--<div id="label3"class="col-md-6 col-sm-6 text-center">
+                    <label>Choose background color</label>
+                </div>
+                <div id="background-color-picker" class="col-md-6 col-sm-6 text-center">
+                    <input type="color" id="color-picker-background"/>
+                </div>-->
+
+               <div id="button-container" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 text-center">
+                    <button id="clear" class="btn btn-default text-center" role="button" onclick="clearCanvas()">Clear Canvas</button>
+                </div>
+                                
+            </div>
+            <div class="col-md-7 col-sm-7 text-center">
+                <canvas id="canvas" height="500px" width="500px"></canvas>
+            </div>
+            
+        </div>
+        <div class="row">
+                <div class="col-md-4 col-md-off-4 col-sm-4 col-md-offset-4 text-center" id="timer"><span id="time-left">:60 </span>seconds left! <button id="start" class="btn btn-danger text-center" role="button" onclick="reset()">Start Timer</button></div>
+            </div>
+        </div>
+        <!--<img id="image" src="background1.png">-->
+        
+        <script src="scripts.js"></script>
+    </body>
+</html>
